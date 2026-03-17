@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINMORPH — Komunitas Investor Anti-FOMO, Pro-Strategi</title>
+  <meta name="description" content="Finmorph adalah komunitas edukasi crypto & saham IDX #1 di Indonesia. Belajar investasi yang fearless, anti-FOMO, dan berbasis strategi bersama ribuan investor cerdas." />
+  <meta name="keywords" content="komunitas crypto, saham IDX, trading crypto, anti fomo, komunitas investasi Indonesia, belajar bitcoin, saham pemula" />
+  <meta property="og:title" content="FINMORPH — Komunitas Investor Anti-FOMO" />
+  <meta property="og:description" content="Bergabunglah dengan 7.000+ investor yang belajar crypto & IDX dengan kepala dingin dan strategi tajam." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --border: #1e1e1e;
+      --accent: #C8F53B;
+      --accent2: #FF4D1C;
+      --text: #f0ede6;
+      --muted: #6b6b6b;
+      --card: #131313;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+      backdrop-filter: blur(0px);
+    }
+    nav.scrolled {
+      border-bottom-color: var(--border);
+      background: rgba(8,8,8,0.9);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #080808;
+      border: none;
+      padding: 10px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(200,245,59,0.3); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 48px 80px;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(200,245,59,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-ticker {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .hero-ticker::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.5); }
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 8vw, 110px);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .line span {
+      display: block;
+      animation: slideUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+      transform: translateY(100%);
+    }
+    .hero-title .line:nth-child(1) span { animation-delay: 0.1s; }
+    .hero-title .line:nth-child(2) span { animation-delay: 0.2s; color: var(--accent); }
+    .hero-title .line:nth-child(3) span { animation-delay: 0.3s; }
+    @keyframes slideUp {
+      to { transform: translateY(0); }
+    }
+
+    .hero-sub {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 44px;
+      max-width: 480px;
+    }
+    .hero-sub strong { color: var(--text); font-style: normal; }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080808;
+      border: none;
+      padding: 18px 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '→';
+      margin-left: 8px;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(200,245,59,0.4); transform: translateY(-2px); }
+    .btn-primary:hover::after { transform: translateX(4px); }
+
+    .btn-ghost {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    /* HERO RIGHT — STATS CARD */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInRight 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.4s; }
+    .stat-card:nth-child(2) { animation-delay: 0.55s; margin-left: 40px; }
+    .stat-card:nth-child(3) { animation-delay: 0.7s; }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--text);
+    }
+    .stat-value span { color: var(--accent); }
+    .stat-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* MARQUEE */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 40px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: 3px;
+      color: var(--muted);
+    }
+    .marquee-item .dot { color: var(--accent); font-size: 20px; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* MANIFESTO */
+    .manifesto {
+      padding: 120px 48px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-eyebrow::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .manifesto-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.35;
+      color: var(--text);
+    }
+    .manifesto-text .highlight {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .manifesto-text .strike {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* PILLARS */
+    .pillars {
+      padding: 80px 48px 120px;
+    }
+    .pillars-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+    .pillars-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 80px);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+    }
+    .pillar {
+      background: var(--bg);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .pillar:hover { background: var(--card); }
+    .pillar:hover .pillar-icon { color: var(--accent); }
+    .pillar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: var(--border);
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      letter-spacing: 2px;
+      line-height: 1;
+      transition: color 0.3s;
+    }
+    .pillar:hover .pillar-num { color: rgba(200,245,59,0.08); }
+    .pillar-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+      transition: color 0.3s;
+    }
+    .pillar-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .pillar-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* WHAT YOU GET */
+    .benefits {
+      padding: 80px 48px 120px;
+      background: var(--surface);
+    }
+    .benefits-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .benefits-left h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 72px);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .benefits-left h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .benefits-left p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .benefits-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .benefit-check {
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      color: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .benefit-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .benefit-text span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* PRICING */
+    .pricing {
+      padding: 80px 48px 120px;
+    }
+    .pricing-inner { max-width: 1100px; margin: 0 auto; }
+    .pricing-header { text-align: center; margin-bottom: 64px; }
+    .pricing-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 80px);
+      letter-spacing: 2px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+    .price-card {
+      background: var(--bg);
+      padding: 48px 44px;
+    }
+    .price-card.featured {
+      background: var(--accent);
+      color: #080808;
+    }
+    .price-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+    .price-card.featured .price-badge {
+      border-color: rgba(0,0,0,0.2);
+      color: rgba(0,0,0,0.6);
+    }
+    .price-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .price-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-period {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .price-card.featured .price-period { color: rgba(0,0,0,0.5); }
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .price-features li .tick {
+      width: 18px;
+      height: 18px;
+      background: rgba(200,245,59,0.15);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .price-card.featured .tick {
+      background: rgba(0,0,0,0.12);
+      color: #080808;
+    }
+    .btn-price {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-price-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-price-ghost:hover { border-color: var(--text); }
+    .btn-price-dark {
+      background: #080808;
+      color: var(--accent);
+    }
+    .btn-price-dark:hover { background: #111; }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 80px 48px 120px;
+      background: var(--surface);
+    }
+    .test-header { text-align: center; margin-bottom: 60px; }
+    .test-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 72px);
+      letter-spacing: 2px;
+    }
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .test-card {
+      background: var(--bg);
+      padding: 36px 32px;
+    }
+    .test-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .test-quote .em { color: var(--accent); font-style: normal; }
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .test-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .test-name { font-size: 14px; font-weight: 600; }
+    .test-role { font-size: 12px; color: var(--muted); }
+
+    /* FAQ */
+    .faq {
+      padding: 80px 48px 120px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 72px);
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      gap: 20px;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: transform 0.3s;
+      color: var(--accent);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding-bottom 0.3s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding-bottom: 24px;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      padding: 120px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(200,245,59,0.07) 0%, transparent 60%);
+    }
+    .final-cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(60px, 9vw, 130px);
+      letter-spacing: 2px;
+      line-height: 0.9;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .final-cta h2 span { color: var(--accent); display: block; }
+    .final-cta p {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+    .final-cta .btn-primary { position: relative; font-size: 15px; padding: 20px 56px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      color: var(--muted);
+    }
+    footer .footer-logo span { color: var(--accent); }
+    footer p { font-size: 12px; color: var(--muted); }
+    footer .footer-links { display: flex; gap: 24px; }
+    footer .footer-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer .footer-links a:hover { color: var(--text); }
+
+    /* SCROLL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+      .hero-right { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-card:nth-child(2) { margin-left: 0; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .benefits-inner { grid-template-columns: 1fr; gap: 40px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .pillars, .benefits, .pricing, .testimonials, .manifesto, .faq, .final-cta {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">FIN<span>MORPH</span></a>
+    <a href="#join" class="nav-cta">Bergabung Sekarang</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-ticker">Komunitas Investor Indonesia · Live</div>
+      <h1 class="hero-title">
+        <span class="line"><span>JANGAN</span></span>
+        <span class="line"><span>FOMO.</span></span>
+        <span class="line"><span>BE FEARLESS.</span></span>
+      </h1>
+      <p class="hero-sub">
+        Komunitas edukasi <strong>Crypto & Saham IDX</strong> yang mengajarkan strategi tajam, 
+        bukan ikut-ikutan. Bergabunglah dengan ribuan investor yang 
+        berpikir kritis dan berani melawan arus.
+      </p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-primary">Masuk Komunitas</a>
+        <a href="#apa-itu" class="btn-ghost">Pelajari lebih lanjut</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-label">Total Anggota</div>
+        <div class="stat-value">7<span>,888</span></div>
+        <div class="stat-desc">Investor aktif di komunitas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Konten Edukasi</div>
+        <div class="stat-value">231<span>+</span></div>
+        <div class="stat-desc">Post analisis & insight</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Fokus Market</div>
+        <div class="stat-value">2<span>X</span></div>
+        <div class="stat-desc">Crypto & Saham IDX Indonesia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="dot">✦</span> BITCOIN SERIES</span>
+      <span class="marquee-item"><span class="dot">✦</span> SAHAM IDX</span>
+      <span class="marquee-item"><span class="dot">✦</span> ANTI FOMO</span>
+      <span class="marquee-item"><span class="dot">✦</span> ANALISIS TEKNIKAL</span>
+      <span class="marquee-item"><span class="dot">✦</span> MINDSET INVESTOR</span>
+      <span class="marquee-item"><span class="dot">✦</span> RISK MANAGEMENT</span>
+      <span class="marquee-item"><span class="dot">✦</span> KOMUNITAS PAID</span>
+      <span class="marquee-item"><span class="dot">✦</span> FINMORPH</span>
+      <!-- duplicate -->
+      <span class="marquee-item"><span class="dot">✦</span> BITCOIN SERIES</span>
+      <span class="marquee-item"><span class="dot">✦</span> SAHAM IDX</span>
+      <span class="marquee-item"><span class="dot">✦</span> ANTI FOMO</span>
+      <span class="marquee-item"><span class="dot">✦</span> ANALISIS TEKNIKAL</span>
+      <span class="marquee-item"><span class="dot">✦</span> MINDSET INVESTOR</span>
+      <span class="marquee-item"><span class="dot">✦</span> RISK MANAGEMENT</span>
+      <span class="marquee-item"><span class="dot">✦</span> KOMUNITAS PAID</span>
+      <span class="marquee-item"><span class="dot">✦</span> FINMORPH</span>
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto reveal" id="apa-itu">
+    <div class="section-eyebrow">Manifesto Kami</div>
+    <p class="manifesto-text">
+      Kami percaya investor terbaik bukan yang paling cepat beli, 
+      tapi yang paling <span class="highlight">paham kenapa mereka beli.</span>
+      <br><br>
+      Di Finmorph, kami tidak mengajarkan kamu untuk 
+      <span class="strike">ikut hype</span> atau 
+      <span class="strike">panic sell</span>.
+      Kami mengajarkan cara membaca pasar dengan kepala dingin — 
+      dan berani masuk ketika <span class="highlight">orang lain takut.</span>
+    </p>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="pillars-header reveal">
+      <h2 class="pillars-title">TIGA<br>PILAR<br>FINMORPH</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon">🧠</div>
+        <div class="pillar-name">Critical Thinking</div>
+        <p class="pillar-desc">Belajar menganalisis aset sendiri tanpa bergantung pada signal orang lain. Fundamental, teknikal, dan makro — semua diajarkan dari akar.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon">🛡️</div>
+        <div class="pillar-name">Anti-FOMO Culture</div>
+        <p class="pillar-desc">Komunitas yang aktif menolak hype dan pump blind. Setiap keputusan investasi harus punya dasar — bukan karena "kata orang".</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-name">Fearless Execution</div>
+        <p class="pillar-desc">Ketika strategi sudah matang, tidak ada tempat untuk ragu. Kami melatih mentalitas untuk berani masuk dengan kalkulasi yang jelas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="benefits">
+    <div class="benefits-inner">
+      <div class="benefits-left reveal">
+        <div class="section-eyebrow">Yang Kamu Dapatkan</div>
+        <h2>AKSES <em>PENUH</em> KE ARSENAL INVESTOR</h2>
+        <p>Bukan sekedar grup chat. Ini adalah ekosistem belajar lengkap untuk membuat kamu benar-benar siap di pasar crypto & IDX.</p>
+        <a href="#join" class="btn-primary">Bergabung Sekarang</a>
+      </div>
+      <div class="benefits-right reveal">
+        <ul class="benefits-list">
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Analisis Crypto & IDX Mingguan</strong>
+              <span>Insight eksklusif setiap minggu langsung dari analis Finmorph</span>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Bitcoin Series — Modul Lengkap</strong>
+              <span>Dari dasar hingga strategi lanjutan untuk navigasi siklus Bitcoin</span>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Live Discussion & Q&A</strong>
+              <span>Diskusi langsung dengan sesama member dan mentor berpengalaman</span>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Watchlist & Screening Tools</strong>
+              <span>Template dan tools untuk seleksi saham IDX dan crypto secara mandiri</span>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Mindset & Psychology Trading</strong>
+              <span>Konten khusus untuk membangun mental baja sebagai investor</span>
+            </div>
+          </li>
+          <li class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">
+              <strong>Akses Komunitas Telegram Private</strong>
+              <span>Bergabung dengan ribuan investor aktif dalam channel eksklusif</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="join">
+    <div class="pricing-inner">
+      <div class="pricing-header reveal">
+        <div class="section-eyebrow" style="justify-content:center">Pilih Paketmu</div>
+        <h2>INVESTASI<br>TERBAIK UNTUK<br>INVESTORMU</h2>
+      </div>
+      <div class="pricing-grid reveal">
+        <div class="price-card">
+          <div class="price-badge">Starter</div>
+          <div class="price-name">BULANAN</div>
+          <div class="price-amount">99K</div>
+          <div class="price-period">per bulan · bisa cancel kapan saja</div>
+          <ul class="price-features">
+            <li><span class="tick">✓</span> Akses komunitas Telegram</li>
+            <li><span class="tick">✓</span> Analisis mingguan</li>
+            <li><span class="tick">✓</span> Bitcoin Series dasar</li>
+            <li><span class="tick">✓</span> Live Q&A bulanan</li>
+            <li><span class="tick" style="opacity:0.3">✓</span> <span style="opacity:0.4">Modul lanjutan (terbatas)</span></li>
+          </ul>
+          <a href="https://lynk.id/finmorph" target="_blank" class="btn-price btn-price-ghost">Mulai Sekarang</a>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Paling Populer ✦</div>
+          <div class="price-name">TAHUNAN</div>
+          <div class="price-amount">799K</div>
+          <div class="price-period">per tahun · hemat 33% vs bulanan</div>
+          <ul class="price-features">
+            <li><span class="tick">✓</span> Semua fitur paket Bulanan</li>
+            <li><span class="tick">✓</span> Akses semua modul & materi</li>
+            <li><span class="tick">✓</span> Bitcoin Series lengkap</li>
+            <li><span class="tick">✓</span> Watchlist & screening template</li>
+            <li><span class="tick">✓</span> Priority Q&A langsung ke mentor</li>
+          </ul>
+          <a href="https://lynk.id/finmorph" target="_blank" class="btn-price btn-price-dark">Bergabung Sekarang</a>
+        </div>
+      </div>
+      <p style="text-align:center; font-size:13px; color:var(--muted); margin-top:24px;">
+        💬 Ada pertanyaan sebelum join? DM langsung di <a href="https://instagram.com/finmorph" style="color:var(--accent)">@finmorph</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="test-header reveal">
+      <div class="section-eyebrow" style="justify-content:center">Kata Member Kami</div>
+      <h2>MEREKA<br>SUDAH BUKTIKAN</h2>
+    </div>
+    <div class="test-grid reveal">
+      <div class="test-card">
+        <p class="test-quote">
+          "Sebelum kenal Finmorph, aku sering ikut-ikutan beli tanpa tau kenapa. Sekarang setiap posisi aku <span class="em">punya alasan yang jelas.</span>"
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">R</div>
+          <div>
+            <div class="test-name">Rizky A.</div>
+            <div class="test-role">Retail Investor · Surabaya</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">
+          "Komunitas yang beneran anti-hype. Diskusinya <span class="em">substantif banget</span> — bukan cuma 'kapan pump bro'."
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">F</div>
+          <div>
+            <div class="test-name">Fara D.</div>
+            <div class="test-role">Fresh Graduate Investor · Jakarta</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <p class="test-quote">
+          "Bitcoin Series-nya lengkap sekali. Dari on-chain sampai siklus halving — <span class="em">sekarang aku ngerti big picture-nya.</span>"
+        </p>
+        <div class="test-author">
+          <div class="test-avatar">A</div>
+          <div>
+            <div class="test-name">Andi P.</div>
+            <div class="test-role">Crypto Enthusiast · Bandung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="section-eyebrow reveal">FAQ</div>
+    <h2 class="faq-title reveal">MASIH ADA<br>PERTANYAAN?</h2>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Apakah ini cocok untuk pemula total?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Ya, sangat cocok. Finmorph dirancang untuk semua level — dari yang baru mendengar kata "saham" hingga yang sudah trading bertahun-tahun tapi masih sering FOMO. Kami mulai dari fundamental dan membangun pemahamanmu secara bertahap.
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Apakah ini memberikan signal beli/jual saham atau crypto?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Tidak. Finmorph bukan signal group. Kami mengajarkan kamu cara menganalisis dan membuat keputusan sendiri. Tujuan kami adalah membuat kamu mandiri — bukan bergantung pada orang lain untuk tahu kapan harus beli atau jual.
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Berapa lama akses saya setelah bayar?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Paket bulanan memberikan akses 30 hari, dan paket tahunan memberikan akses penuh selama 365 hari. Perpanjangan dapat dilakukan kapan saja sebelum masa aktif berakhir.
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Komunitas-nya aktif tidak?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Sangat aktif. Dengan 7,800+ anggota dan konten yang terus diupdate, ada selalu diskusi berlangsung — terutama saat market sedang bergerak. Tim Finmorph juga aktif menjawab pertanyaan.
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFAQ(this)">
+        Bagaimana cara bergabung?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">
+        Pilih paket di atas, klik tombol bergabung, dan ikuti proses pembayaran melalui link yang tersedia. Setelah pembayaran dikonfirmasi, kamu akan langsung diarahkan ke komunitas private kami.
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>
+      MASA DEPAN
+      <span>FINANSIALMU</span>
+      DIMULAI HARI INI
+    </h2>
+    <p>Bergabunglah dengan 7,888 investor yang memilih untuk berpikir kritis, anti-FOMO, dan berani.</p>
+    <a href="https://lynk.id/finmorph" target="_blank" class="btn-primary">Gabung Finmorph Sekarang</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">FIN<span>MORPH</span></div>
+    <p>© 2026 Finmorph. No. #1 Finance Media & Community Indonesia.</p>
+    <div class="footer-links">
+      <a href="https://instagram.com/finmorph" target="_blank">Instagram</a>
+      <a href="https://lynk.id/finmorph" target="_blank">Lynk.id</a>
+      <a href="#">Syarat & Ketentuan</a>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // FAQ toggle
+    function toggleFAQ(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+</html>
